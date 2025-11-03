@@ -24,7 +24,7 @@
 
 (Using the DOM)</p>
 
-<h2>Resources<h2>
+<h2>Resources</h2>
 
 <p><a href="https://supersimple.dev/projects/amazon">Amazon Project</a></p>
 

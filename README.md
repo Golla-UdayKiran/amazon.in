@@ -24,6 +24,24 @@
 
 (Using the DOM)</p>
 
+<p>1. Remove the product from the cart
+
+2. Update the HTML</p>
+
+<p><ins>Steps</ins>
+
+1. Create a new array
+
+2. Loop through the cart
+
+3. Add each product to the new array, except for this productId</p>
+
+<p><ins>Steps</ins>
+
+1. Use the DOM to get the element to remove
+
+2. Use .remove() method</p>
+
 <h2>Resources</h2>
 
 <p><a href="https://supersimple.dev/projects/amazon">Amazon Project</a></p>

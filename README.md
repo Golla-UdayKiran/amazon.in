@@ -2,11 +2,11 @@
 
 <p><ins>Main Idea of JavaScript</ins>
 
-1. Save the data
+1. Save the data (Model)
 
-2. Generate the HTML
+2. Generate the HTML (View)
 
-3. Make it interactive</p>
+3. Make it interactive (Controller)</p>
 
 <p><ins>Steps</ins>
 
@@ -24,7 +24,9 @@
 
 (Using the DOM)</p>
 
-<p>1. Remove the product from the cart
+<p>
+
+1. Remove the product from the cart
 
 2. Update the HTML</p>
 
@@ -41,6 +43,58 @@
 1. Use the DOM to get the element to remove
 
 2. Use .remove() method</p>
+
+<p><ins>To get these days:</ins>
+
+1. Get today's date
+
+2. Do calculations (Add 7 days, ...)
+
+3. Display the date in easy-to-read format</p>
+
+<p><ins>Steps</ins>
+
+1. Loop through deliveryOptions
+
+2. For each option, generate some HTML
+
+3. Combine the HTML together</p>
+
+<p>
+
+1. Update deliveryOptionId in the cart.
+
+2. Update the page.</p>
+
+<p><ins>Steps</ins>
+
+1. Loop through the cart and find the product
+
+2. Update the deliveryOptionId of the product</p>
+
+<p>
+
+1. Update the data
+
+2. Regenerate all the HTML
+
+= MVC
+
+Model - View - Controller</p>
+
+<p><ins>Steps</ins>
+
+1. Loop through the cart
+
+2. For each product, price * quantity
+
+3. Add everything together</p>
+
+<p><ins>Steps</ins>
+
+1. Loop through the cart
+
+2. Add all the shipping costs together</p>
 
 <h2>Resources</h2>
 

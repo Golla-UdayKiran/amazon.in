@@ -61,7 +61,8 @@ export function renderOrderSummary() {
                 data-product-id="${matchingProduct.id}">
                 Update
               </span>
-              <input class="quantity-input js-quantity-input-${matchingProduct.id}">
+              <input class="quantity-input js-quantity-input"
+                data-product-id="${matchingProduct.id}">
               <span class="save-quantity-link link-primary js-save-link"
                 data-product-id="${matchingProduct.id}">
                 Save
@@ -172,47 +173,60 @@ export function renderOrderSummary() {
       });
     });
 
+  function handleSaveQuantity(productId) {
+    const container = document.querySelector(
+      `.js-cart-item-container-${productId}`
+    );
+    container.classList.remove('is-editing-quantity');
+
+    // Here's an example of a feature we can add: validation.
+    // Note: we need to move the quantity-related code up
+    // because if the new quantity is not valid, we should
+    // return early and NOT run the rest of the code. This
+    // technique is called an "early return".
+    const quantityInput = container.querySelector(
+      '.js-quantity-input'
+    );
+    const newQuantity = Number(quantityInput.value);
+
+    if (newQuantity < 0 || newQuantity >= 1000) {
+      alert('Quantity must be at least 0 and less than 1000');
+      return;
+    }
+    updateQuantity(productId, newQuantity);
+
+    renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
+
+    // We can delete the code below (from the original solution)
+    // because instead of using the DOM to update the page directly
+    // we can use MVC and re-render everything. This will make sure
+    // the page always matches the data.
+
+    // const quantityLabel = document.querySelector(
+    //   `.js-quantity-label-${productId}`
+    // );
+    // quantityLabel.innerHTML = newQuantity;
+
+    // updateCartQuantity();
+  }
+
   document.querySelectorAll('.js-save-link')
     .forEach((link) => {
       link.addEventListener('click', () => {
         const productId = link.dataset.productId;
-
-        const container = document.querySelector(
-          `.js-cart-item-container-${productId}`
-        );
-        container.classList.remove('is-editing-quantity');
-
-        // Here's an example of a feature we can add: validation.
-        // Note: we need to move the quantity-related code up
-        // because if the new quantity is not valid, we should
-        // return early and NOT run the rest of the code. This
-        // technique is called an "early return".
-        const quantityInput = document.querySelector(
-          `.js-quantity-input-${productId}`
-        );
-        const newQuantity = Number(quantityInput.value);
-
-        if (newQuantity < 0 || newQuantity >= 1000) {
-          alert('Quantity must be at least 0 and less than 1000');
-          return;
-        }
-        updateQuantity(productId, newQuantity);
-
-        renderCheckoutHeader();
-        renderOrderSummary();
-        renderPaymentSummary();
-
-        // We can delete the code below (from the original solution)
-        // because instead of using the DOM to update the page directly
-        // we can use MVC and re-render everything. This will make sure
-        // the page always matches the data.
-
-        // const quantityLabel = document.querySelector(
-        //   `.js-quantity-label-${productId}`
-        // );
-        // quantityLabel.innerHTML = newQuantity;
-
-        // updateCartQuantity();
+        handleSaveQuantity(productId);
       });
+    });
+
+  document.querySelectorAll('.js-quantity-input')
+    .forEach((input) => {
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          const productId = input.dataset.productId;
+          handleSaveQuantity(productId);
+        }
+      })
     });
 }

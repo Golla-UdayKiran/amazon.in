@@ -1,7 +1,11 @@
 // Optional: notice we can write imports on multiple
 // lines so the line doesn't get too long.
-import {addToCart,
-  calculateCartQuantity} from '../data/cart.js';
+/*
+import {cart,
+   addToCart,
+   calculateCartQuantity} from '../data/cart.js';
+*/
+import {cart} from '../data/cart-class.js';
 import {products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
@@ -21,14 +25,14 @@ products.forEach((product) => {
 
       <div class="product-rating-container">
         <img class="product-rating-stars"
-          src="images/ratings/rating-${product.rating.stars * 10}.png">
+          src="${product.getStarsUrl()}">
         <div class="product-rating-count link-primary">
           ${product.rating.count}
         </div>
       </div>
 
       <div class="product-price">
-        ₹${formatCurrency(product.pricePaise)}
+        ${product.getPrice()}
       </div>
 
       <div class="product-quantity-container">
@@ -45,6 +49,8 @@ products.forEach((product) => {
           <option value="10">10</option>
         </select>
       </div>
+
+      ${product.extraInfoHTML()}
 
       <div class="product-spacer"></div>
 
@@ -77,7 +83,7 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 const addedMessageTimeouts = {};
 
 function updateCartQuantity() {
-  const cartQuantity = calculateCartQuantity();
+  const cartQuantity = cart.calculateCartQuantity();
 
   document.querySelector('.js-cart-quantity')
     .innerHTML = cartQuantity;
@@ -89,7 +95,7 @@ document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
       const {productId} = button.dataset;
-      addToCart(productId);
+      cart.addToCart(productId);
       updateCartQuantity();
 
       const addedMessage = document.querySelector(

@@ -1,4 +1,5 @@
-import {cart} from '../../data/cart.js';
+// import {cart} from '../../data/cart.js';
+import {cart} from '../../data/cart-class.js';
 import {getProduct} from '../../data/products.js';
 import {getDeliveryOption} from '../../data/deliveryOptions.js';
 import {formatCurrency} from '../utils/money.js';
@@ -7,7 +8,7 @@ export function renderPaymentSummary() {
   let productPricePaise = 0;
   let shippingPricePaise = 0;
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     const product = getProduct(cartItem.productId);
     productPricePaise += product.pricePaise * cartItem.quantity;
 
@@ -21,7 +22,7 @@ export function renderPaymentSummary() {
 
   let cartQuantity = 0;
   
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     cartQuantity += cartItem.quantity;
   });
 

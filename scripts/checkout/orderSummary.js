@@ -4,6 +4,7 @@
 // Optional: when importing a lot of values, you
 // can put each value on a separate line to make
 // the code easier to read.
+/*
 import {
   cart,
   removeFromCart,
@@ -11,6 +12,8 @@ import {
   updateQuantity,
   calculateCartQuantity
 } from '../../data/cart.js';
+*/
+import {cart} from '../../data/cart-class.js';
 import {products, getProduct} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
@@ -22,7 +25,7 @@ import {renderCheckoutHeader} from './checkoutHeader.js';
 export function renderOrderSummary() {
   let cartSummaryHTML = '';
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     const productId = cartItem.productId;
 
     const matchingProduct = getProduct(productId);
@@ -50,7 +53,7 @@ export function renderOrderSummary() {
               ${matchingProduct.name}
             </div>
             <div class="product-price js-product-price-${matchingProduct.id}">
-              ₹${formatCurrency(matchingProduct.pricePaise)}
+              ${matchingProduct.getPrice()}
             </div>
             <div class="product-quantity
               js-product-quantity-${matchingProduct.id}">
@@ -61,7 +64,7 @@ export function renderOrderSummary() {
                 data-product-id="${matchingProduct.id}">
                 Update
               </span>
-              <input class="quantity-input js-quantity-input"
+              <input class="quantity-input js-quantity-input-${matchingProduct.id} js-quantity-input"
                 data-product-id="${matchingProduct.id}">
               <span class="save-quantity-link link-primary js-save-link"
                 data-product-id="${matchingProduct.id}">
@@ -130,7 +133,7 @@ export function renderOrderSummary() {
     .forEach((link) => {
       link.addEventListener('click', () => {
         const productId = link.dataset.productId;
-        removeFromCart(productId);
+        cart.removeFromCart(productId);
 
         updateCartQuantity();
 
@@ -144,14 +147,14 @@ export function renderOrderSummary() {
     .forEach((element) => {
       element.addEventListener('click', () => {
         const {productId, deliveryOptionId} = element.dataset;
-        updateDeliveryOption(productId, deliveryOptionId);
+        cart.updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
         renderPaymentSummary();
       });
     });
 
   function updateCartQuantity() {
-    const cartQuantity = calculateCartQuantity();
+    const cartQuantity = cart.calculateCartQuantity();
 
     const cartLink = document.querySelector('.js-return-to-home-link');
     if (cartLink) {
@@ -193,7 +196,7 @@ export function renderOrderSummary() {
       alert('Quantity must be at least 0 and less than 1000');
       return;
     }
-    updateQuantity(productId, newQuantity);
+    cart.updateQuantity(productId, newQuantity);
 
     renderCheckoutHeader();
     renderOrderSummary();

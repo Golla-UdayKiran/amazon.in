@@ -96,8 +96,23 @@ Model - View - Controller</p>
 
 2. Add all the shipping costs together</p>
 
+<p><ins>Process</ins>
+
+1. Make changes to code
+
+2. Re-run the tests
+
+3. Save to Git</p>
+
+<p>
+
+1. Put this code in a function
+
+2. Give this function to loadProducts()</p>
+
 <h2>Resources</h2>
 
-<p><a href="https://supersimple.dev/projects/amazon">Amazon Project</a></p>
+<p>1. <a href="https://supersimple.dev/projects/amazon">Amazon Project</a></p>
+<p>2. <a href="https://supersimplebackend.dev/documentation">SuperSimpleDev Backend Documentation</a></p>
 
 <code>website</code>: https://amazondotin.vercel.app

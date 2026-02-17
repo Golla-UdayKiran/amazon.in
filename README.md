@@ -30,6 +30,22 @@
 
 2. Update the HTML</p>
 
+<p><ins>Create a Module</ins>
+
+1. Create a file
+
+2. Don't load the file with <script>
+
+Any variables we create inside the file, will be contained inside the file.</p>
+
+<p><ins>Get a Variable Out of a File</ins>
+
+1. Add type="module" attribute
+
+2. Export
+
+3. Import</p>
+
 <p><ins>Steps</ins>
 
 1. Create a new array
